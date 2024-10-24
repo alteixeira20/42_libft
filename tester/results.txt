@@ -1,0 +1,3 @@
+ft_strlen: SUCCESS
+ft_isalpha: SUCCESS
+ft_isdigit: SUCCESS
