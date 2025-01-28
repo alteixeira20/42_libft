@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/01/24 16:12:05 by paalexan         ###   ########.fr        #
+#    Updated: 2025/01/28 19:45:57 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ $(PRINTF_DIR):
 	@rm -rf $(PRINTF_DIR)/src $(PRINTF_DIR)/srcb
 	@rm -f $(PRINTF_DIR)/Makefile $(PRINTF_DIR)/README.md
 	@rm -rf $(PRINTF_DIR)/.tester $(PRINTF_DIR)/.git
+	@make lib
 
 # Prepare directories for object files
 prepare_dirs:
@@ -161,6 +162,6 @@ fclean: clean
 		echo "$(PREFIX) No $(CYAN)gnl$(RESET) repository found."; \
 	fi
 
-re: fclean all
+re: fclean all lib
 
 .PHONY: all clean fclean re lib
