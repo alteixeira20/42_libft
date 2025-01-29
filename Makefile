@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/01/28 19:45:57 by paalexan         ###   ########.fr        #
+#    Updated: 2025/01/29 00:59:59 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -162,6 +162,6 @@ fclean: clean
 		echo "$(PREFIX) No $(CYAN)gnl$(RESET) repository found."; \
 	fi
 
-re: fclean all lib
+re: fclean all
 
-.PHONY: all clean fclean re lib
+.PHONY: all clean fclean re
