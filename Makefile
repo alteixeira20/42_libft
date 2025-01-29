@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/01/29 02:10:24 by paalexan         ###   ########.fr        #
+#    Updated: 2025/01/29 23:39:40 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ LINKED_LIST_SRC := \
 	$(LIBFT_DIR)/ft_lstclear.c  $(LIBFT_DIR)/ft_lstdelone.c  \
 	$(LIBFT_DIR)/ft_lstiter.c  $(LIBFT_DIR)/ft_lstlast.c  \
 	$(LIBFT_DIR)/ft_lstmap.c  $(LIBFT_DIR)/ft_lstnew.c  \
-	$(LIBFT_DIR)/ft_lstsize.c
+	$(LIBFT_DIR)/ft_lstsize.c $(LIBFT_DIR)/ft_lstswap.c
 LIBFT_SRC := $(CHAR_CHECK_SRC) $(STRING_MANIP_SRC) $(MEMORY_SRC) $(CONVERSION_SRC) \
 	$(CHAR_TRANSFORM_SRC) $(FD_OUTPUT_SRC) $(LINKED_LIST_SRC)
 
