@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/01/29 23:57:39 by paalexan         ###   ########.fr        #
+#    Updated: 2025/02/19 16:08:29 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ GNL_DIR		:= gnl
 # Libft Source Code
 CHAR_CHECK_SRC := \
 	$(LIBFT_DIR)/ft_isalnum.c  $(LIBFT_DIR)/ft_isalpha.c  $(LIBFT_DIR)/ft_isascii.c \
-	$(LIBFT_DIR)/ft_isdigit.c  $(LIBFT_DIR)/ft_isprint.c
+	$(LIBFT_DIR)/ft_isdigit.c  $(LIBFT_DIR)/ft_isprint.c \
+	$(LIBFT_DIR)/ft_iswhitespace.c
 STRING_MANIP_SRC := \
 	$(LIBFT_DIR)/ft_strlen.c   $(LIBFT_DIR)/ft_strlcat.c  $(LIBFT_DIR)/ft_strlcpy.c \
 	$(LIBFT_DIR)/ft_strdup.c   $(LIBFT_DIR)/ft_strchr.c   $(LIBFT_DIR)/ft_strrchr.c \
