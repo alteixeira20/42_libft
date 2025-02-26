@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/02/19 16:08:29 by paalexan         ###   ########.fr        #
+#    Updated: 2025/02/26 23:16:30 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ PRINTF_SRC := $(PRINTF_DIR)/ft_printf_bonus.c $(PRINTF_DIR)/ft_printf_numbers_bo
 	$(PRINTF_DIR)/ft_padding_utils_bonus.c $(PRINTF_DIR)/ft_parser_bonus.c
 
 # GNL Source Code
-GNL_SRC := $(GNL_DIR)/get_next_line_bonus.c $(GNL_DIR)/get_next_line_utils_bonus.c
+GNL_SRC := $(GNL_DIR)/get_next_line_bonus.c $(GNL_DIR)/get_next_line_utils_bonus.c $(GNL_DIR)/get_next_line_utils2_bonus.c
 
 # Object Files
 OBJ_DIR		:= obj
