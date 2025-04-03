@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 01:01:36 by paalexan          #+#    #+#             */
-/*   Updated: 2025/02/19 16:09:56 by paalexan         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:00:02 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(const char *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+void	ft_swapstrs(char *a, char *b);
 
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

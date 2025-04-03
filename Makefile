@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/02/26 23:16:30 by paalexan         ###   ########.fr        #
+#    Updated: 2025/04/03 17:00:43 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ STRING_MANIP_SRC := \
 	$(LIBFT_DIR)/ft_strdup.c   $(LIBFT_DIR)/ft_strchr.c   $(LIBFT_DIR)/ft_strrchr.c \
 	$(LIBFT_DIR)/ft_strnstr.c  $(LIBFT_DIR)/ft_strncmp.c  $(LIBFT_DIR)/ft_strmapi.c \
 	$(LIBFT_DIR)/ft_striteri.c $(LIBFT_DIR)/ft_strjoin.c  $(LIBFT_DIR)/ft_strtrim.c \
-	$(LIBFT_DIR)/ft_substr.c   $(LIBFT_DIR)/ft_split.c
+	$(LIBFT_DIR)/ft_substr.c   $(LIBFT_DIR)/ft_split.c $(LIBFT_DIR)/ft_swapstrs.c
 MEMORY_SRC := \
 	$(LIBFT_DIR)/ft_memchr.c   $(LIBFT_DIR)/ft_memcmp.c   $(LIBFT_DIR)/ft_memcpy.c \
 	$(LIBFT_DIR)/ft_memmove.c  $(LIBFT_DIR)/ft_memset.c   $(LIBFT_DIR)/ft_bzero.c \
