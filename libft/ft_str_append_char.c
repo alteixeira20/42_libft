@@ -6,30 +6,20 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:44:34 by paalexan          #+#    #+#             */
-/*   Updated: 2025/04/11 00:48:34 by paalexan         ###   ########.fr       */
+/*   Updated: 2025/04/11 15:03:19 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_str_append_char(char *str, char c)
+void	ft_str_append_char(char **res, const char c)
 {
-	char	*new;
-	size_t	len;
+	char	tmp[2];
+	char	*joined;
 
-	if (!str)
-		len = 0;
-	else
-		len = ft_strlen(str);
-	new = malloc(len + 2);
-	if (!new)
-		return (NULL);
-	if (str)
-	{
-		ft_memcpy(new, str, len);
-		free(str);
-	}
-	new[len] = c;
-	new[len + 1] = '\0';
-	return (new);
+	tmp[0] = c;
+	tmp[1] = '\0';
+	joined = ft_strjoin(*res, tmp);
+	free(*res);
+	*res = joined;
 }
