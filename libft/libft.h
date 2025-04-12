@@ -6,7 +6,7 @@
 /*   By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 01:01:36 by paalexan          #+#    #+#             */
-/*   Updated: 2025/04/12 02:30:41 by paalexan         ###   ########.fr       */
+/*   Updated: 2025/04/12 02:36:48 by paalexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 int		ft_atoi(const char *nptr);
+long	ft_atol(const char *str);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isnumeric(const char *str);

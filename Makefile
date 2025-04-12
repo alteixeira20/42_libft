@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/04/12 02:32:40 by paalexan         ###   ########.fr        #
+#    Updated: 2025/04/12 02:37:13 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ MEMORY_SRC := \
 	$(LIBFT_DIR)/ft_memmove.c  $(LIBFT_DIR)/ft_memset.c   $(LIBFT_DIR)/ft_bzero.c \
 	$(LIBFT_DIR)/ft_calloc.c
 CONVERSION_SRC := \
-	$(LIBFT_DIR)/ft_atoi.c     $(LIBFT_DIR)/ft_itoa.c
+	$(LIBFT_DIR)/ft_atoi.c     $(LIBFT_DIR)/ft_atol.c $(LIBFT_DIR)/ft_itoa.c
 CHAR_TRANSFORM_SRC := \
 	$(LIBFT_DIR)/ft_tolower.c  $(LIBFT_DIR)/ft_toupper.c
 FD_OUTPUT_SRC := \
