@@ -6,7 +6,7 @@
 #    By: paalexan <paalexan@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 16:10:40 by paalexan          #+#    #+#              #
-#    Updated: 2025/04/17 15:08:36 by paalexan         ###   ########.fr        #
+#    Updated: 2025/04/23 16:44:10 by paalexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ GNL_DIR		:= gnl
 CHAR_CHECK_SRC := \
 	$(LIBFT_DIR)/ft_isalnum.c  $(LIBFT_DIR)/ft_isalpha.c  $(LIBFT_DIR)/ft_isascii.c \
 	$(LIBFT_DIR)/ft_isdigit.c  $(LIBFT_DIR)/ft_isprint.c $(LIBFT_DIR)/ft_isnumeric.c \
-	$(LIBFT_DIR)/ft_iswhitespace.c $(LIBFT_DIR)/ft_isspace.c
+	$(LIBFT_DIR)/ft_iswhitespace.c $(LIBFT_DIR)/ft_isspace.c $(LIBFT_DIR)/ft_max.c
 STRING_MANIP_SRC := \
 	$(LIBFT_DIR)/ft_strlen.c   $(LIBFT_DIR)/ft_strlcat.c  $(LIBFT_DIR)/ft_strlcpy.c \
 	$(LIBFT_DIR)/ft_strdup.c   $(LIBFT_DIR)/ft_strchr.c   $(LIBFT_DIR)/ft_strrchr.c \
