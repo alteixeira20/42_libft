@@ -1,7 +1,9 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/C-00599C?logo=c&logoColor=white&style=for-the-badge" alt="C badge">
-  <img src="https://img.shields.io/badge/GNU%20Make-1B2330?logo=gnu&logoColor=white&style=for-the-badge" alt="GNU Make badge">
-  <img src="https://img.shields.io/badge/Shell-Scripts-4EAA25?logo=gnu-bash&logoColor=white&style=for-the-badge" alt="Shell badge">
+  <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C badge">
+  <img src="https://img.shields.io/badge/Make-427819?style=for-the-badge&logo=cmake&logoColor=white" alt="Make badge">
+  <img src="https://img.shields.io/badge/Shell-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Shell badge">
+  <img src="https://img.shields.io/badge/Valgrind-773344?style=for-the-badge&logo=gnu&logoColor=white" alt="Valgrind badge">
+  <img src="https://img.shields.io/badge/GDB-800000?style=for-the-badge&logo=gnu&logoColor=white" alt="GDB badge">
 </p>
 <h1 align="center">Libft Toolkit</h1>
 <p align="center">Reusable C building blocks with an in-repo tester tuned for 42 project evaluations.</p>
