@@ -1,167 +1,168 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/C-00599C?logo=c&logoColor=white&style=for-the-badge" alt="C badge">
+  <img src="https://img.shields.io/badge/GNU%20Make-1B2330?logo=gnu&logoColor=white&style=for-the-badge" alt="GNU Make badge">
+  <img src="https://img.shields.io/badge/Shell-Scripts-4EAA25?logo=gnu-bash&logoColor=white&style=for-the-badge" alt="Shell badge">
+</p>
 <h1 align="center">Libft Toolkit</h1>
+<p align="center">Reusable C building blocks with an in-repo tester tuned for 42 project evaluations.</p>
 
-A reusable implementation of the 42 curriculum's foundational C library, extended with additional helpers and backed by an in-house tester designed to validate every feature before peer evaluations or interviews.
+1. [At a Glance](#at-a-glance)
+2. [About This Library](#about-this-library)
+3. [Subject Compliance](#subject-compliance)
+4. [Custom Tester](#custom-tester)
+5. [Repository Layout](#repository-layout)
+6. [Build & Integration](#build--integration)
+7. [Usage Guidelines](#usage-guidelines)
+8. [Feature Deep Dive](#feature-deep-dive)
+9. [Input & Validation](#input--validation)
+10. [Rendering & Output](#rendering--output)
+11. [Internal Architecture](#internal-architecture)
+12. [Tester Workflow](#tester-workflow)
+13. [Results & Reporting](#results--reporting)
 
-<h2 align="center">Index</h2>
-<h3 align="center"><b>
-    <a href="#About">About Libft</a>
-    <span> • </span>
-    <a href="#Tester">Custom Tester</a>
-    <span> • </span>
-    <a href="#Subject">Subject Compliance</a>
-    <span> • </span>
-    <a href="#Layout">Repository Layout</a>
-    <span> • </span>
-    <a href="#Build">Build & Integration</a>
-    <span> • </span>
-    <a href="#Usage">Usage Guidelines</a>
-    <span> • </span>
-    <a href="#Functions">Function Reference</a>
-    <span> • </span>
-    <a href="#Extras">Additional Helpers</a>
-    <span> • </span>
-    <a href="#Related">Related Projects</a>
-    <span> • </span>
-    <a href="#Credits">Credits</a>
-</b></h3>
+## At a Glance
+> **Highlights:** Static C library covering all mandatory libft calls plus field-tested helpers.
+- Ships 40+ string, memory, FD, conversion, and list routines backed by `libft.a`.
+- Adds practical extras (`ft_atol`, `ft_isnumeric`, `ft_max`, `ft_str_append_char`) proven useful in later 42 milestones.
+- Bundles local copies of `printf/` and `gnl/` so dependent projects link without external fetches during defense.
+- Includes a colorized regression tester under `.testers/libft` to preflight submissions.
 
-## <a id="About"></a>About Libft
-- Reimplementation of the standard C library utilities required by the official 42 *Libft* subject (see `subject_libft.pdf`).
-- Built to be Norm-compliant, memory-safe, and reusable across subsequent projects such as `get_next_line`, `ft_printf`, and personal side work.
-- Expanded with quality-of-life helpers (`ft_atol`, `ft_isnumeric`, `ft_max`, `ft_str_append_char`, etc.) that proved valuable in more advanced codebases.
+## About This Library
+> **Highlights:** Norm-compliant foundations with pragmatic ergonomics.
+- Written in pure C, respecting 42 Norm guidelines and minimal dependencies (standard headers only inside `libft/`).
+- Favors readability: short helpers like `ft_words_counter` keep complex flows (e.g., `ft_split`) approachable for peer review.
+- Optional utilities sit alongside mandatory functions but remain header-gated so downstream repos can opt in selectively.
+- Memory ownership is explicit—every allocator returns heap pointers that callers must release (tester cross-checks accidental leaks).
 
-## <a id="Tester"></a>Custom Tester
-- Located under `.testers/libft`, the tester recompiles all functions with `-Wall -Wextra -Werror` and links against the freshly built `libft.a`.
-- Modular test files cover every mandatory feature; `run_tests.sh` orchestrates compilation, execution, color-coded reporting, and cleanup of temporary descriptor outputs.
-- The workflow mirrors 42's evaluation expectations: producing a `results.txt` log and ensuring regressions are detected before submission.
-- To run it:
-  ```bash
-  cd .testers/libft
-  ./run_tests.sh
-  ```
+## Subject Compliance
+> **Highlights:** Matches the scope mandated in `docs/subject_libft.pdf` while flagging deviations.
+- Mandatory Part 1/2 functions mirror prototypes and behavior described on pages 7–12 of the subject PDF.
+- Bonus linked-list API implements the full `t_list` toolchain in `libft/`, meeting bonus segregation rules.
+- Makefile exposes `all`, `clean`, `fclean`, and `re`, compiles with `-Wall -Wextra -Werror`, and avoids needless relinks via object caching in `obj/`.
+- Extra helpers stay within subject constraints; only `ft_swapstrs` currently behaves as a pointer swap stub (planned refinement noted below).
 
-## <a id="Subject"></a>Subject Compliance
-- Part 1: full recreation of libc staples for character tests, memory manipulation, and string queries.
-- Part 2: higher-level string builders, conversion routines, and file-descriptor helpers required by the subject.
-- Bonus: full linked-list API using `t_list`, plus optional utilities kept within the same compilation unit while respecting subject constraints.
-- Makefile adheres to the required targets (`all`, `clean`, `fclean`, `re`) and builds with the mandated warning flags.
+## Custom Tester
+> **Highlights:** One-command run that mirrors evaluation habits.
+- Located at `.testers/libft`, orchestrated by `run_tests.sh` (POSIX shell) with per-function reporters in `functions/`.
+- Compiles against the freshly built `libft.a` using `cc -Wall -Wextra -Werror` and links `-lbsd` for `strl*` references (install `libbsd-dev` on Linux).
+- Generates `results.txt` plus staged FD fixture files (`test_putchar_fd.txt`, etc.) that the script cleans after execution.
+- Emits success/KO lines in color and prints a `Test Summary: X/Y` digest for quick health checks.
 
-## <a id="Layout"></a>Repository Layout
-| Path | Description |
-| --- | --- |
-| `libft/` | Source files and `libft.h` for mandatory and extra helper functions. |
-| `.testers/libft/` | Custom tester with modular test cases, orchestrator script, and `results.txt` output. |
-| `printf/` | Bonus implementation of `ft_printf`, cloned on demand by the Makefile. |
-| `gnl/` | Bonus implementation of `get_next_line`, also cloned automatically. |
-| `obj/` | Intermediate object files created during library builds. |
-| `Makefile` | Builds `libft.a`, optionally fetching `printf`/`gnl`, and controls all dependencies. |
-| `libft.a` | Static archive generated from the current sources. |
-| `subject_libft.pdf` | Official subject reference included for context and compliance checks. |
-
-## <a id="Build"></a>Build & Integration
-```bash
-make
+```sh
+cd .testers/libft
+./run_tests.sh
 ```
-- Ensures the optional `printf/` and `gnl/` directories exist (cloning them if absent).
-- Compiles sources into `obj/` and archives them into `libft.a` at the repository root.
-- Passes `-Wall -Wextra -Werror` to every translation unit for production-ready builds.
 
-## <a id="Usage"></a>Usage Guidelines
-- Include the header in client code: `#include "libft.h"`.
-- Link the archive during compilation, e.g.: `cc main.c -L path/to/libft -lft`.
-- For projects that ship multiple 42 prerequisites, keep the generated `libft.a` beside your sources or under a dedicated `libs/` directory.
+<details>
+<summary>Covered functions</summary>
 
-## <a id="Functions"></a>Function Reference
-The tables below list every function implemented in this repository, including optional helpers.
+- Character/ctype checks, core string/memory routines, conversion helpers, FD printers
+- Full linked-list API (`ft_lst*`) with content-aware assertions and cleanups
+- Current scope excludes newer helpers like `ft_isnumeric` or `ft_str_append_char`; see Feature Deep Dive for intended expansion
+</details>
 
-### Character Classification & Helpers
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_isalpha` | `int ft_isalpha(int c);` | Checks if `c` is an alphabetic ASCII character. |
-| `ft_isdigit` | `int ft_isdigit(int c);` | Checks if `c` is a decimal digit (`0`–`9`). |
-| `ft_isnumeric` | `int ft_isnumeric(const char *str);` | Verifies that `str` contains an optional sign followed by digits only. |
-| `ft_isalnum` | `int ft_isalnum(int c);` | Checks if `c` is alphanumeric. |
-| `ft_isascii` | `int ft_isascii(int c);` | Checks if `c` falls within the ASCII range (0–127). |
-| `ft_isprint` | `int ft_isprint(int c);` | Checks if `c` is a printable ASCII character. |
-| `ft_iswhitespace` | `bool ft_iswhitespace(int c);` | Returns `true` for whitespace control characters or space. |
-| `ft_isspace` | `int ft_isspace(char c);` | Detects plain space or tab characters. |
-| `ft_tolower` | `int ft_tolower(int c);` | Converts uppercase ASCII letters to lowercase. |
-| `ft_toupper` | `int ft_toupper(int c);` | Converts lowercase ASCII letters to uppercase. |
-| `ft_max` | `int ft_max(int a, int b);` | Returns the greater of the two integers. |
+## Repository Layout
+> **Highlights:** Flat structure keeps evaluation navigation fast.
+- `docs/subject_libft.pdf` — official 42 brief kept alongside the repo for audits.
+- `libft/` — implementation sources plus `libft.h` covering mandatory and bonus APIs.
+- `.testers/libft/` — tester harness (`tests.c`, `functions/`, `run_tests.sh`, `results.txt`).
+- `printf/` & `gnl/` — local working copies cloned once, stripped of history, ready for downstream linking.
+- `obj/` — build artifacts created by the Makefile; safe to delete via `make clean`.
+- `libft.a` — compiled static archive; regenerated on each `make`.
 
-### String Query & Comparison
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_strlen` | `size_t ft_strlen(const char *str);` | Returns the length of `str`. |
-| `ft_strlcpy` | `size_t ft_strlcpy(char *dst, const char *src, size_t size);` | Copies `src` into `dst` with size limiting and reports `src` length. |
-| `ft_strlcat` | `size_t ft_strlcat(char *dst, const char *src, size_t size);` | Appends `src` to `dst`, respecting the buffer size and reporting intended length. |
-| `ft_strchr` | `char *ft_strchr(const char *s, int c);` | Finds the first occurrence of `c` in `s`. |
-| `ft_strrchr` | `char *ft_strrchr(const char *s, int c);` | Finds the last occurrence of `c` in `s`. |
-| `ft_strncmp` | `int ft_strncmp(const char *s1, const char *s2, size_t n);` | Compares two strings up to `n` characters. |
-| `ft_strcmp` | `int ft_strcmp(const char *s1, const char *s2);` | Compares two strings until they differ or terminate. |
-| `ft_strnstr` | `char *ft_strnstr(const char *big, const char *little, size_t len);` | Searches for `little` within `big` inside `len` characters. |
-| `ft_strdup` | `char *ft_strdup(const char *s);` | Allocates and copies `s` into a new string. |
+## Build & Integration
+> **Highlights:** Default target prepares dependencies then produces `libft.a`.
+- `make` ensures `printf/` and `gnl/` exist (cloning only if missing), creates `obj/`, and archives every `.o` into `libft.a`.
+- `make clean` clears objects, `make fclean` also removes `libft.a` plus the cloned dependency folders for a true fresh start.
+- `make re` chains `fclean` then `all`, rebuilding the full toolchain in one go.
+- Compilation stays deterministic: no hidden flags, and every translation unit uses the same warning set.
 
-### String Builders & Iterators
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_substr` | `char *ft_substr(char const *s, unsigned int start, size_t len);` | Produces a substring starting at `start` with length `len`. |
-| `ft_strjoin` | `char *ft_strjoin(char const *s1, char const *s2);` | Concatenates two strings into a new allocation. |
-| `ft_strtrim` | `char *ft_strtrim(char const *s1, char const *set);` | Trims all characters in `set` from both ends of `s1`. |
-| `ft_split` | `char **ft_split(const char *s, char c);` | Splits `s` into a NULL-terminated array using `c` as delimiter. |
-| `ft_strmapi` | `char *ft_strmapi(const char *s, char (*f)(unsigned int, char));` | Maps each character of `s` through `f`, returning a new string. |
-| `ft_striteri` | `void ft_striteri(char *s, void (*f)(unsigned int, char *));` | Iterates over `s` in place, calling `f` with the index and character pointer. |
-| `ft_str_append_char` | `void ft_str_append_char(char **res, const char c);` | Appends a single character to a heap-allocated string pointer. |
-| `ft_swapstrs` | `void ft_swapstrs(char *a, char *b);` | Swaps two string pointers when handled via references. |
+```sh
+make          # build libft.a (clones printf/gnl if absent)
+make clean    # remove obj/
+make fclean   # clean + remove libft.a, printf/, gnl/
+make re       # force pristine rebuild
+```
 
-### Memory Utilities
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_memset` | `void *ft_memset(void *s, int c, size_t n);` | Fills `n` bytes of `s` with the byte `c`. |
-| `ft_memcpy` | `void *ft_memcpy(void *dest, const void *src, size_t n);` | Copies `n` bytes from `src` to `dest` (non-overlapping). |
-| `ft_memmove` | `void *ft_memmove(void *dest, const void *src, size_t n);` | Copies `n` bytes while safely handling overlap. |
-| `ft_memchr` | `void *ft_memchr(const void *s, int c, size_t n);` | Searches the first `n` bytes of `s` for byte `c`. |
-| `ft_memcmp` | `int ft_memcmp(const void *s1, const void *s2, size_t n);` | Compares two memory blocks byte by byte. |
-| `ft_bzero` | `void ft_bzero(void *s, size_t n);` | Sets `n` bytes of `s` to zero. |
-| `ft_calloc` | `void *ft_calloc(size_t nmemb, size_t size);` | Allocates zero-initialized memory for an array. |
+## Usage Guidelines
+> **Highlights:** Intended for reuse across 42 repos without manual tweaking.
+- Include with `#include "libft/libft.h"` or adjust include paths to suit your project layout.
+- Link the archive via `cc your_main.c ../libft.a` or add `-L`/`-lft` flags inside larger build systems.
+- Keep helper usage optional: if a downstream subject forbids extras, only call functions present in the official PDF.
+- Re-run `.testers/libft/run_tests.sh` after edits; failed cases flag mismatches immediately through `results.txt`.
 
-### Numeric Conversion
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_atoi` | `int ft_atoi(const char *nptr);` | Parses an `int` value from `nptr` with leading whitespace and sign support. |
-| `ft_atol` | `long ft_atol(const char *str);` | Parses a `long` using the same rules as `ft_atoi`, covering wider ranges. |
-| `ft_itoa` | `char *ft_itoa(int n);` | Converts an integer to a newly allocated decimal string. |
+## Feature Deep Dive
+> **Highlights:** Modular helpers organized by use case.
+- String toolkit ranges from safe copying (`ft_strlcpy`, `ft_strlcat`) to builders (`ft_strjoin`, `ft_strtrim`, `ft_split`).
+- Memory primitives (`ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_calloc`) offer low-level control without hidden allocations.
+- Numeric conversions include defensive parsing (`ft_atoi`, `ft_atol`) and formatting via `ft_itoa` for FD output helpers.
+- Linked-list suite (`ft_lstnew` through `ft_lstmap`) follows the subject spec, with tester coverage for iterator/map corner cases.
 
-### File Descriptor Output
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_putchar_fd` | `void ft_putchar_fd(char c, int fd);` | Writes the character `c` to the file descriptor `fd`. |
-| `ft_putstr_fd` | `void ft_putstr_fd(char *s, int fd);` | Writes the string `s` to `fd`. |
-| `ft_putendl_fd` | `void ft_putendl_fd(char *s, int fd);` | Writes `s` followed by a newline to `fd`. |
-| `ft_putnbr_fd` | `void ft_putnbr_fd(int n, int fd);` | Writes the decimal representation of `n` to `fd`. |
+<details>
+<summary>Helper spotlight</summary>
 
-### Linked List API
-| Function | Prototype | Purpose |
-| --- | --- | --- |
-| `ft_lstnew` | `t_list *ft_lstnew(void *content);` | Creates a new list node storing `content`. |
-| `ft_lstadd_front` | `void ft_lstadd_front(t_list **lst, t_list *new);` | Inserts `new` at the beginning of `lst`. |
-| `ft_lstadd_back` | `void ft_lstadd_back(t_list **lst, t_list *new);` | Appends `new` to the end of `lst`. |
-| `ft_lstsize` | `int ft_lstsize(t_list *lst);` | Counts the nodes in `lst`. |
-| `ft_lstlast` | `t_list *ft_lstlast(t_list *lst);` | Retrieves the last node of `lst`. |
-| `ft_lstdelone` | `void ft_lstdelone(t_list *lst, void (*del)(void *));` | Deletes one node and calls `del` on its content. |
-| `ft_lstclear` | `void ft_lstclear(t_list **lst, void (*del)(void *));` | Clears the entire list, deleting every node. |
-| `ft_lstiter` | `void ft_lstiter(t_list *lst, void (*f)(void *));` | Applies `f` to each node's content. |
-| `ft_lstmap` | `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));` | Creates a new list by mapping `f` over `lst`, cleaning up with `del` on failure. |
+- `ft_isnumeric` validates optional sign + digits for gatekeeping user input before conversion.
+- `ft_str_append_char` rebuilds buffers incrementally; it frees the old pointer on failure to prevent leaks.
+- `ft_swapstrs` currently swaps pointer values locally; plan to extend it to swap caller buffers once references are passed by address.
+- `ft_max` provides a tiny arithmetic utility for readability when normalizing bounds.
+</details>
 
-## <a id="Extras"></a>Additional Helpers
-- `ft_isnumeric`, `ft_atol`, and `ft_max` accelerate numeric parsing and comparisons in later projects.
-- `ft_iswhitespace` and `ft_isspace` offer fine-grained whitespace handling tailored to parsing tasks.
-- `ft_str_append_char` and `ft_swapstrs` support custom string builders, reducing boilerplate in utilities such as `get_next_line` or parsers.
-- These helpers stay within the same archive for convenience, while keeping mandatory subject deliverables untouched.
+## Input & Validation
+> **Highlights:** Tolerant parsing with explicit whitespace handling.
+- `ft_iswhitespace` and `ft_isspace` distinguish control-space vs. literal space to tune tokenizers.
+- `ft_atoi` rejects duplicate leading signs (`--`, `++`) to avoid silent UB before conversion.
+- `ft_atol` mirrors that behavior for wider ranges, enabling safe bounds checks before casting back to `int`.
+- `ft_isnumeric` treats standalone signs as invalid, ensuring only well-formed numeric strings pass validation.
 
-## <a id="Related"></a>Related Projects
-- `printf/`: bonus `ft_printf` implementation aligned with the style of this library and intended to link seamlessly.
-- `gnl/`: bonus `get_next_line` sources bundled for a complete I/O toolkit in a single repository snapshot.
+<details>
+<summary>Edge-case considerations</summary>
 
-## <a id="Credits"></a>Credits
-Crafted by paalexan at 42 Porto. Shared for educational purposes—anyone may study, reuse, or extend the work with proper attribution.
+- Current converters do not guard against multiplication overflow; confirm input spans before calling on untrusted data.
+- Whitespace helpers return `bool`/`int` according to their prototypes, so prefer them over duplicating ASCII tables.
+</details>
+
+## Rendering & Output
+> **Highlights:** File-descriptor oriented presentation utilities.
+- `ft_putchar_fd`, `ft_putstr_fd`, `ft_putendl_fd`, and `ft_putnbr_fd` centralize writes for stdout/stderr or custom descriptors.
+- Tester fixtures open temp files to confirm exact byte sequences and clean them post-run.
+- `ft_strmapi` and `ft_striteri` support character-by-character transformations, handy before printing formatted strings.
+- Combined with `ft_printf` (bundled sibling repo), `libft.a` covers both low-level writes and formatted output pipelines.
+
+## Internal Architecture
+> **Highlights:** Simple directory discipline keeps maintenance low.
+- `libft.h` declares every public symbol and `t_list` struct, keeping prototypes centralized for IDE assistance.
+- Object files live in `obj/` with filenames derived via `$(notdir ...)`, preventing collisions across modules.
+- The Makefile defers `lib` compilation until directories exist, ensuring `printf/` and `gnl/` remain in sync without recursive makes.
+- Bonus sources share the primary folder; `_bonus` naming is unnecessary because the subject allows this layout for libft.
+
+## Tester Workflow
+> **Highlights:** Mirrors evaluator behavior start-to-finish.
+- Builds a test binary (`tests`) alongside `libft.a`, keeping artifacts inside `.testers/libft` for easy cleanup.
+- Executes every function suite sequentially, writing verdicts to `results.txt` for archival or sharing with peers.
+- Highlights failures immediately with expected vs. actual values in the same line for quick debugging.
+- Relies on `libbsd` only for reference implementations (`strlcpy`, `strlcat`); macOS users already have them in libc.
+
+<details>
+<summary>Extending coverage</summary>
+
+- Add new `.c` files under `.testers/libft/functions/` and declare their prototypes in `tester.h` to include them in the sweep.
+- Re-run the script; the `find` command auto-discovers added tests without touching the Makefile.
+</details>
+
+## Results & Reporting
+> **Highlights:** Actionable logs without noise.
+- `results.txt` collects one line per function (SUCCESS/KO with context) so reviewers can skim outcomes quickly.
+- `run_tests.sh` streams colored copies of those lines to stdout and ends with a success/total tally.
+- Failures display expected vs. actual payloads (buffers, substrings, numeric values) to reduce reproduction time.
+- Clean-up step deletes temporary FD fixtures, keeping the tester tree tidy between runs.
+
+```sh
+sed -n '1,10p' .testers/libft/results.txt   # quick glance after a run
+```
+
+<details>
+<summary>Next steps after a failure</summary>
+
+- Re-run the relevant test file directly under `cc` with `-g` if you need to attach `lldb` or `gdb`.
+- Compare against glibc/bsd behavior using the inline references already present inside each tester function.
+</details>
