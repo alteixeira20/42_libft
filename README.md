@@ -5,7 +5,7 @@
   <img src="https://img.shields.io/badge/Valgrind-773344?style=for-the-badge&logo=gnu&logoColor=white" alt="Valgrind badge">
   <img src="https://img.shields.io/badge/GDB-800000?style=for-the-badge&logo=gnu&logoColor=white" alt="GDB badge">
 </p>
-<h1 align="center">Libft Toolkit</h1>
+<h1 align="center">Libft (extended)</h1>
 <p align="center">Reusable C building blocks with an in-repo tester tuned for 42 project evaluations.</p>
 
 1. [At a Glance](#at-a-glance)
